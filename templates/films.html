@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 style="text-align: center;">Daftar Film</h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+        {% for row in hasil %}
+            <div style="margin: 20px; text-align: center; width: 200px;">
+                <!-- Gunakan <img> untuk menampilkan poster film berdasarkan Poster_URL -->
+                <img src="{{ row[2] }}" alt="Poster Film" style="width: 100%; height: 300px; object-fit: cover; object-position: center; margin-bottom: 10px;">
+                <h3>{{ row[1] }}</h3>  <!-- Menampilkan hanya judul -->
+                <a href="{{ url_for('film_detail', id=row[0]) }}">Lihat Detail</a>  <!-- Tautan ke halaman detail -->
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 style="text-align: center; color: #e50914;">Detail Film: {{ film[1] }}</h2>
+    
+    <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 20px;">
+        
+        <!-- Display the film poster -->
+        <img src="{{ film[5] }}" alt="Poster Film" style="width: 300px; height: 450px; object-fit: cover; object-position: center; margin-bottom: 20px; border-radius: 8px;">
+        
+        <form method="POST" style="width: 80%; max-width: 400px; margin-top: 20px; padding: 15px; background-color: #1a1a1a; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);">
+            <!-- Display Genre, Number of Copies, and Available Stock -->
+            <p><strong>Genre:</strong> {{ film[2] }}</p>
+            <p><strong>Jumlah Keping:</strong> {{ film[3] }}</p>
+            <p><strong>Stok Tersedia:</strong> {{ film[4] }}</p>
+            
+            <!-- Penyewa Information -->
+            <div style="margin-bottom: 15px;">
+                <label for="no_id" style="display: block; font-size: 1rem; color: #fff; margin-bottom: 5px;">No_Id (Penyewa):</label>
+                <input type="text" id="no_id" name="no_id" value="{{ no_id }}" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background-color: #f9f9f9;">
+            </div>
+
+            <!-- Nama and Alamat Inputs -->
+            <div style="margin-bottom: 15px;">
+                <label for="nama" style="display: block; font-size: 1rem; color: #fff; margin-bottom: 5px;">Nama:</label>
+                <input type="text" id="nama" name="nama" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background-color: #f9f9f9;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="alamat" style="display: block; font-size: 1rem; color: #fff; margin-bottom: 5px;">Alamat:</label>
+                <input type="text" id="alamat" name="alamat" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background-color: #f9f9f9;">
+            </div>
+
+            <!-- Jenis_Id Dropdown -->
+            <div style="margin-bottom: 15px;">
+                <label for="Jenis_Id" style="display: block; font-size: 1rem; color: #fff; margin-bottom: 5px;">Jenis Identitas:</label>
+                <select id="Jenis_Id" name="Jenis_Id" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background-color: #f9f9f9;">
+                    <option value="KAPEG">KAPEG</option>
+                    <option value="KAPEL">KAPEL</option>
+                    <option value="KTM">KTM</option>
+                    <option value="KTP">KTP</option>
+                    <option value="SIM">SIM</option>
+                </select>
+            </div>
+
+            <!-- Submit Button to Borrow Film -->
+            <button type="submit" class="btn btn-gradient w-100 mt-3" style="padding: 12px; background-color: #e50914; color: white; border: none; border-radius: 5px; font-size: 1.1rem;">
+                Pinjam Film
+            </button>
+        </form>
+    </div>
+{% endblock %}

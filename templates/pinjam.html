@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="pinjam-container">
+        <div class="film-poster-container">
+            <!-- Gunakan div dengan background-image di CSS -->
+            <div class="film-poster {{ film[0] }}" style="width: 300px; height: 450px; background-size: cover; background-position: center;"></div>
+        </div>
+
+        <div class="film-info-container">
+            <h2>{{ film[1] }}</h2>
+            <p><strong>Genre:</strong> {{ film[2] }}</p>
+            <p><strong>Jumlah Keping:</strong> {{ film[3] }}</p>
+            <p><strong>Stok Tersedia:</strong> {{ film[4] }}</p>
+            <p><strong>Sinopsis:</strong> {{ film[6] }}</p>
+
+            <!-- Tombol Pinjam -->
+            <form method="POST">
+                <button type="submit" class="cta-button">Pinjam Film</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

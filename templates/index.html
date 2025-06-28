@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Hero Section (Landing Page) dengan background dan lapisan hitam transparan -->
+    <section class="hero">
+        <!-- Lapisan hitam transparan -->
+        <div class="overlay"></div>
+        <div>
+            <h1>Welcome to Rental DVD</h1>
+            <p style="font-size: 24px;">Explore our wide selection of DVDs to rent.</p>
+            <a href="{{ url_for('films') }}" class="cta-button">Browse Movies</a>
+        </div>
+    </section>
+{% endblock %}

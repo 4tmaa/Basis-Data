@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 border-0 rounded-4">
+        <h2 class="text-center mb-5" style="font-family: 'Roboto', sans-serif; color: #ffffff;">Tambah Film Baru</h2>
+        <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+            {{ form.hidden_tag() }}
+            
+            <div class="mb-4">
+                <div class="form-floating">
+                    {{ form.kode_film(class="form-control", id="kode_film", placeholder="Masukkan kode film") }}
+                    <label for="kode_film"></label>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="form-floating">
+                    {{ form.judul(class="form-control", id="judul", placeholder="Masukkan judul film") }}
+                    <label for="judul"></label>
+                </div>
+            </div>
+            
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <select class="form-select" id="genre" name="genre" aria-label="Genre" required>
+                            <option value="" selected disabled>Pilih Genre</option>
+                            <option value="Action">Action</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Thriller">Thriller</option>
+                        </select>
+                        <label for="genre"></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        {{ form.jml_keping(class="form-control", id="jml_keping", placeholder="Jumlah keping") }}
+                        <label for="jml_keping"></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        {{ form.stok(class="form-control", id="stok", placeholder="Stok film") }}
+                        <label for="stok"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="form-floating">
+                    {{ form.poster_url(class="form-control", id="poster_url", placeholder="https://contoh.com/poster.jpg") }}
+                    <label for="poster_url"></label>
+                    <div class="form-text"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-gradient w-100 mt-3">Simpan</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
