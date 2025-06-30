@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 style="text-align: center; color: #e50914;">Edit Film: {{ film[1] }}</h2>
+    
+    <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 20px;">
+        
+        <form method="POST" style="width: 80%; max-width: 400px; margin-top: 20px; padding: 15px; background-color: #1a1a1a; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);">
+            <div style="margin-bottom: 15px;">
+                <label for="judul" style="display: block; font-size: 1rem; color: #fff; margin-bottom: 5px;">Judul:</label>
+                <input type="text" id="judul" name="judul" value="{{ film[1] }}" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background-color: #f9f9f9;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="genre" style="display: block; font-size: 1rem; color: #fff; margin-bottom: 5px;">Genre:</label>
+                <input type="text" id="genre" name="genre" value="{{ film[2] }}" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background-color: #f9f9f9;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="stok" style="display: block; font-size: 1rem; color: #fff; margin-bottom: 5px;">Stok:</label>
+                <input type="number" id="stok" name="stok" value="{{ film[4] }}" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background-color: #f9f9f9;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="poster_url" style="display: block; font-size: 1rem; color: #fff; margin-bottom: 5px;">Poster URL:</label>
+                <input type="text" id="poster_url" name="poster_url" value="{{ film[5] }}" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background-color: #f9f9f9;">
+            </div>
+
+            <button type="submit" name="edit" style="padding: 12px; background-color: #4caf50; color: white; border: none; border-radius: 5px; font-size: 1.1rem; width: 150px; margin: 10px;">
+                Edit Film
+            </button>
+        </form>
+    </div>
+{% endblock %}

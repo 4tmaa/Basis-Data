@@ -86,16 +86,76 @@ def film_detail(id):
     cursor.close()
     return render_template('film_detail.html', film=film)
 
+@app.route('/film/edit/<string:id>', methods=['GET', 'POST'])
+def edit_film(id):
+    db = get_db_connection()
+    cursor = db.cursor()
 
-# Route untuk menampilkan daftar film
-@app.route('/films')
+    # Retrieve film details
+    cursor.execute("SELECT * FROM film WHERE Kode_Film = %s;", (id,))
+    film = cursor.fetchone()
+
+    if request.method == 'POST':
+        # Get updated film details from the form
+        new_judul = request.form['judul']
+        new_genre = request.form['genre']
+        new_stok = request.form['stok']
+        new_poster_url = request.form['poster_url']
+
+        # Update the film details in the database
+        cursor.execute("""
+            UPDATE film 
+            SET Judul = %s, Genre = %s, Stok = %s, Poster_URL = %s 
+            WHERE Kode_Film = %s;
+        """, (new_judul, new_genre, new_stok, new_poster_url, id))
+        db.commit()
+
+        flash('Film berhasil diperbarui!', 'success')
+        return redirect(url_for('film_detail', id=id))  # Redirect to the updated film detail page
+
+    cursor.close()
+    return render_template('edit_film.html', film=film)
+
+@app.route('/film/delete/<string:id>', methods=['POST'])
+def delete_film(id):
+    db = get_db_connection()
+    cursor = db.cursor()
+
+    # Delete the film from the database
+    cursor.execute("DELETE FROM film WHERE Kode_Film = %s;", (id,))
+    db.commit()
+
+    cursor.close()
+
+    flash('Film berhasil dihapus!', 'danger')
+    return redirect(url_for('films'))  # Redirect to the films list after deleting the film
+
+
+@app.route('/films', methods=['GET', 'POST'])
 def films():
     db = get_db_connection()
     cursor = db.cursor()
-    cursor.execute("SELECT Kode_Film, Judul, Poster_URL FROM film;")
+
+    # Ambil daftar genre yang tersedia untuk filter
+    cursor.execute("SELECT DISTINCT Genre FROM film;")
+    genres = cursor.fetchall()
+
+    # Filter film berdasarkan genre yang dipilih (jika ada)
+    if request.method == 'POST':
+        selected_genre = request.form.get('genre')
+        
+        if selected_genre:  # Jika genre dipilih
+            cursor.execute("SELECT Kode_Film, Judul, Poster_URL, Genre FROM film WHERE Genre = %s;", (selected_genre,))
+        else:  # Jika tidak ada genre yang dipilih (Semua Genre)
+            cursor.execute("SELECT Kode_Film, Judul, Poster_URL, Genre FROM film;")
+
+    else:  # Untuk GET, menampilkan semua film tanpa filter
+        cursor.execute("SELECT Kode_Film, Judul, Poster_URL, Genre FROM film;")
+
     result = cursor.fetchall()
     cursor.close()
-    return render_template('films.html', hasil=result)
+    
+    return render_template('films.html', hasil=result, genres=genres)
 
 @app.route('/tambah-film', methods=['GET', 'POST'])
 def tambah_film():
